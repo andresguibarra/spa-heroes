@@ -1,0 +1,48 @@
+<mat-card class="card">
+  <mat-card-header>
+    <mat-card-title>Heroes</mat-card-title>
+    <mat-card-subtitle>Guardians of the galaxy</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="form-container">
+
+      <mat-form-field>
+        <mat-label>Filter heroes</mat-label>
+        <input matInput type="text" [(ngModel)]="filterText" (ngModelChange)="getByParameter()">
+        <button *ngIf="filterText" matSuffix mat-icon-button aria-label="Clear" (click)="filterText=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+
+
+    <div class="form-container" *ngFor="let h of heroes">
+      <div class="label">
+        <mat-label>{{h.name}}</mat-label>
+      </div>
+
+      <button mat-icon-button (click)="update(h.id, h.name)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="delete(h.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+
+
+    <form class="form-container" (ngSubmit)="add(heroInput.value)">
+      <mat-form-field>
+        <mat-label>Name of the hero</mat-label>
+        <input matInput #heroInput maxlength="10" placeholder="Ex. Superman, Batman, Catman...">
+        <mat-hint align="end">{{heroInput.value.length}} / 10</mat-hint>
+      </mat-form-field>
+      <button mat-icon-button type="submit">
+        <mat-icon>add</mat-icon>
+      </button>
+    </form>
+
+  </mat-card-content>
+
+</mat-card>
